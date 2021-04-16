@@ -21,7 +21,7 @@ for old_key in temp_keys:
 
 app = Flask(__name__)
 api = Api(app)
-cors = CORS(app, resources={r'/wind-speed-data/*': {'origins': '*'}})
+CORS(app)
 
 
 class Wind(Resource):
@@ -33,4 +33,4 @@ class Wind(Resource):
 api.add_resource(Wind, '/wind-speed-data/<int:date>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
