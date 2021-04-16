@@ -25,7 +25,8 @@ wind_speeds = {
     '20-04-2021': {'wind': 5.6, 'lower': 2.4, 'upper': 9.1},
     '21-04-2021': {'wind': 5.6, 'lower': 2.4, 'upper': 8.8},
     '22-04-2021': {'wind': 5.6, 'lower': 2.4, 'upper': 11.8},
-    '23-04-2021': {'wind': 5.6, 'lower': 2.4, 'upper': 6.5}
+    '23-04-2021': {'wind': 5.6, 'lower': 2.4, 'upper': 6.5},
+    '24-04-2021': {'wind': 5.6, 'lower': 2.4, 'upper': 6.5},
 }
 
 app = Flask(__name__)
