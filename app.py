@@ -1,7 +1,9 @@
-from flask import Flask
+from flask import Flask, request
+from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
 
 import pandas as pd
+from datetime import datetime
 
 df = pd.read_csv('./wind_forecast.csv', usecols=['ds', 'yhat', 'yhat_lower', 'yhat_upper'])
 df = df.loc[df['ds'] > '2020-12-31']
@@ -18,12 +20,17 @@ for old_key in temp_keys:
 
 
 app = Flask(__name__)
+api = Api(app)
+cors = CORS(app, resources={r'/wind-speed-data/*': {'origins': '*'}})
 
-@app.route('/get-wind-speed-data')
-def get_wind_speed_data():
-    return wind_speeds
 
+class Wind(Resource):
+    def get(self, date):
+        date = datetime.fromtimestamp(date/1000.0).strftime('%Y-%m-%d')
+        print(date)
+        return wind_speeds[date]
+
+api.add_resource(Wind, '/wind-speed-data/<int:date>')
 
 if __name__ == '__main__':
-    print()
     app.run(debug=True)
